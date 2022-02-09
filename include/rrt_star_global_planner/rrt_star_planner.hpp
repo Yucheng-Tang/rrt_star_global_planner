@@ -87,7 +87,7 @@ class RRTStarPlanner : public nav_core::BaseGlobalPlanner {
   float map_height_;
   double radius_;
   double goal_tolerance_;
-  bool search_specific_area_{true};
+  bool search_specific_area_{false}; //default value: true
   std::string global_frame_;
   std::shared_ptr<RRTStar> planner_;
 };

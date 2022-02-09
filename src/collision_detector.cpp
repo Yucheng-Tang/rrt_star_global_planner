@@ -24,14 +24,19 @@ bool CollisionDetector::isThisPointCollides(float wx, float wy) {
   int mx, my;
   worldToMap(wx, wy, mx, my);
 
-  if ((mx < 0) || (my < 0) || (mx >= costmap_->getSizeInCellsX()) || (my >= costmap_->getSizeInCellsY()))
+  if ((mx < 0) || (my < 0) || (mx >= costmap_->getSizeInCellsX()) || (my >= costmap_->getSizeInCellsY())){
     return true;
+  }
 
   // getCost returns unsigned char
   unsigned int cost = static_cast<int>(costmap_->getCost(mx, my));
 
-  if (cost > 0)
+  // std::cout<<"The cost is: "<<cost<<std::endl;
+
+  if (cost > 0){
+    // ROS_INFO("This point collides.");
     return true;
+  }
 
   return false;
 }
@@ -53,8 +58,10 @@ bool CollisionDetector::isThereObstacleBetween(const Node &node, const std::pair
     for (int n = 1; n < steps_number; n++) {
       p_n.first = node.x + n*resolution_*cos(theta);
       p_n.second = node.y + n*resolution_*sin(theta);
-      if (isThisPointCollides(p_n.first, p_n.second))
+      if (isThisPointCollides(p_n.first, p_n.second)){
+        // ROS_INFO("There is an obstacle between two nodes.");
         return true;
+      }
     }
     return false;
   }

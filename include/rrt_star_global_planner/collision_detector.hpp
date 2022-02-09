@@ -5,6 +5,8 @@
 #ifndef RRT_STAR_GLOBAL_PLANNER_COLLISION_DETECTOR_HPP_  // NOLINT
 #define RRT_STAR_GLOBAL_PLANNER_COLLISION_DETECTOR_HPP_
 
+#include <ros/ros.h>
+
 #include <costmap_2d/costmap_2d.h>
 
 #include <utility>

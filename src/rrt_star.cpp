@@ -51,6 +51,8 @@ bool RRTStar::pathPlanning(std::list<std::pair<float, float>> &path) {
 
   bool found_next;
   while (nodes_.size() < max_num_nodes_) {
+    ROS_INFO("RRT* Global Planner is searching path.");
+
     found_next = false;
     while (!found_next) {
       p_rand = sampleFree();  // random point in the free space
@@ -62,6 +64,9 @@ bool RRTStar::pathPlanning(std::list<std::pair<float, float>> &path) {
       }
     }
 
+    ROS_INFO("RRT* Global Planner found next node.");
+    std::cout<<"searched nodes: "<<nodes_.size()<<std::endl;
+
     if (!goal_reached_) {
       if (isGoalReached(p_new)) {
         goal_reached_ = true;
@@ -71,6 +76,9 @@ bool RRTStar::pathPlanning(std::list<std::pair<float, float>> &path) {
 
     if (goal_reached_ && nodes_.size() > min_num_nodes_) {
       computeFinalPath(path);
+  
+      ROS_INFO("RRT* Global Planner searched a  path.");
+
       return true;
     }
   }
